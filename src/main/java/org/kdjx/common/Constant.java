@@ -10,9 +10,19 @@ public class Constant {
 
 
     /**
-     * 识别进入游戏
+     * 识别 进入游戏 的 文字
      */
     public static String startGame = "进入游戏";
+
+    /**
+     * 识别 点击选区 的 文字
+     */
+    public static String CLICKREGION = "点击选区";
+
+    /**
+     * 识别 闪光地鼠 的 文字
+     */
+    public static String FLASHGROUNDOG = "闪光地鼠";
 
     /**
      * 项目路径
@@ -22,5 +32,5 @@ public class Constant {
     /**
      * 存放截图路径
      */
-    public static File PICTUREPATH = new File(Constant.PATH + "\\src\\main\\resources\\picture\\kdjx.png");
+    public static String PICTUREPATH = Constant.PATH + "\\picture\\";
 }

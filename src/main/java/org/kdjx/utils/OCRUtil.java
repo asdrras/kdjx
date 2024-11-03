@@ -28,21 +28,21 @@ public class OCRUtil {
     }
 
     /**
-     * 识别
+     * 识别 传文件名
      */
-    public ArrayList<TextBlock> getTextBlockList(){
-        OcrResult ocrResult = inferenceEngine.runOcr(Constant.PICTUREPATH.getPath(), paramConfig);
+    public ArrayList<TextBlock> getTextBlockList(String str){
+        OcrResult ocrResult = inferenceEngine.runOcr(Constant.PICTUREPATH + str, paramConfig);
         return ocrResult.getTextBlocks();
     }
 
     /**
      * 是否存在这个字符串
      */
-    public TextBlock getTextBlock(String str){
-        ArrayList<TextBlock> textBlockList = this.getTextBlockList();
+    public TextBlock getTextBlock(String writing,String str){
+        ArrayList<TextBlock> textBlockList = this.getTextBlockList(str);
 
         for(TextBlock textBlock : textBlockList){
-            if(str.equals(textBlock.getText())){
+            if(writing.equals(textBlock.getText())){
                 return textBlock;
             }
         }
