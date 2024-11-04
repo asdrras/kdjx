@@ -17,7 +17,7 @@ public class FileUtil {
     /**
      * 删除所有 图片
      */
-    public static void closeAllFile(){
+    public static void closeAllFile() {
 
         File file = new File(Constant.PICTUREPATH);
 
@@ -30,15 +30,27 @@ public class FileUtil {
         File[] files = file.listFiles();
 
         if (files != null) {
-            for(File f : files){
-                boolean delete = f.delete();
 
-                if(delete){
-                    log.info("删除{}文件成功",f.getName());
-                }else {
-                    log.error("删除{}文件失败",f.getName());
+            // 当 截图 的长度大于 8 删除所有照片
+            if (files.length >= 8) {
+                for (File f : files) {
+
+                    String[] name = f.getName().split("\\.");
+
+                    if("png".equals(name[1])){
+                        break;
+                    }
+
+                    boolean delete = f.delete();
+
+                    if (delete) {
+                        log.info("删除{}文件成功", f.getName());
+                    } else {
+                        log.error("删除{}文件失败", f.getName());
+                    }
                 }
             }
+
         }
 
     }

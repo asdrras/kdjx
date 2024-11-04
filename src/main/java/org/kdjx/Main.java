@@ -6,104 +6,56 @@ import com.benjaminwan.ocrlibrary.TextBlock;
 import org.kdjx.common.Constant;
 import org.kdjx.utils.ADBUtil;
 import org.kdjx.utils.FileUtil;
+import org.kdjx.utils.GameUtil;
 import org.kdjx.utils.OCRUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-
 
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
-        ADBUtil adbUtil = new ADBUtil();
-        OCRUtil ocrUtil = new OCRUtil();
 
         // 检验功能是否成功
 //        adbUtil.examination();
 
         // 脚本初始化
-        adbUtil.init();
+        ADBUtil.init();
 
         // 先睡10秒 让游戏加载
         Thread.sleep(10000);
-//
-        TextBlock textBlock = null;
-        // 进入游戏
-        long startTime = System.currentTimeMillis();
-        while (true) {
-            log.info("等待进入主页...");
 
-            String screenshot = adbUtil.screenshot();
+        log.info("等待进入主页...");
 
-            textBlock = ocrUtil.getTextBlock(Constant.startGame,screenshot);
+        // 第一个出现 进入游戏 文字
+        boolean st = GameUtil.clickEntryGame();
 
-            Thread.sleep(1500);
+        Thread.sleep(3300);
 
-            if(textBlock != null){
-                break;
-            }
+        GameUtil.clickLogin();
 
-            long endTime = System.currentTimeMillis();
-            if((endTime - startTime) > 20000){ // 设置 20秒的超时时间
-                break;
-            }
-        }
+        log.info("成功进入 游戏主界面");
 
-        log.info(".......................");
+        Thread.sleep(9000);
 
-        // 移动到 进入游戏 并点击
-        ArrayList<Point> boxPoint = null;
-        if (textBlock != null) {
-            boxPoint = textBlock.getBoxPoint();
-        }
+        GameUtil.getIndexGameInfo();
 
-        Point xy = boxPoint.get(boxPoint.size() / 2);
-        Point point = new Point(xy.getX(),xy.getY());
-        adbUtil.move(point);
+        Thread.sleep(2000);
 
-        Thread.sleep(900);
+        ADBUtil.move(new Point(50,50));
 
-        String number = adbUtil.screenshot();
-        String openGame = adbUtil.screenshot();
+        Thread.sleep(2000);
 
-//        System.out.println("boxPoint:\n" + boxPoint);
+        ADBUtil.move(new Point(50,50));
 
-
-        // 删除缓存
+        // 删除截图缓存
 //        FileUtil.closeAllFile();
-
-//        // 还是 null 的话 就是启动失败
-//        if(textBlock == null){
-//            log.error("游戏启动失败.......");
-//            return;
-//        }
-//
-//        System.out.println(textBlock.getBoxPoint().getFirst());
-//        adbUtil.clickScreen(textBlock.getBoxPoint().getFirst());
-
-
-//        TextBlock res = null;
-//
-//        long startTime = System.currentTimeMillis();
-//
-//        adbUtil.screenshot();
-//        while (true){
-//            res = ocrUtil.getTextBlock(Constant.startGame);
-//            long endTime = System.currentTimeMillis();
-//
-//            if(endTime - startTime > 12000){
-//                break;
-//            }
-//
-//            adbUtil.screenshot();
-//            System.out.println(res);
-//        }
-
     }
 }
