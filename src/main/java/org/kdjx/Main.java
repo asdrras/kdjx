@@ -4,6 +4,7 @@ package org.kdjx;
 import com.benjaminwan.ocrlibrary.Point;
 import com.benjaminwan.ocrlibrary.TextBlock;
 import org.kdjx.common.Constant;
+import org.kdjx.entity.GUI;
 import org.kdjx.utils.ADBUtil;
 import org.kdjx.utils.FileUtil;
 import org.kdjx.utils.GameUtil;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,6 +24,15 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
+
+        GUI gui = new GUI();
+
+        gui.openWin();
+        
+
+        if(1 == 1){
+            return;
+        }
 
         // 检验功能是否成功
 //        adbUtil.examination();

@@ -4,11 +4,8 @@ import org.kdjx.common.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 public class FileUtil {
 
@@ -37,7 +34,7 @@ public class FileUtil {
 
                     String[] name = f.getName().split("\\.");
 
-                    if("png".equals(name[1])){
+                    if ("png".equals(name[1])) {
                         break;
                     }
 
@@ -53,5 +50,16 @@ public class FileUtil {
 
         }
 
+    }
+
+    /**
+     * 图片裁剪
+     * @param x 起始点的X坐标
+     * @param y 起始点的Y坐标
+     * @param width 裁剪区域的宽度
+     * @param height 裁剪区域的高度
+     */
+    public static void CropImage(BufferedImage image, int x, int y, int width, int height) {
+        BufferedImage croppedImage = image.getSubimage(x, y, width, height);
     }
 }

@@ -26,7 +26,7 @@ public class GameUtil {
      */
     public static boolean clickEntryGame() throws IOException, InterruptedException {
         String screenshot = ADBUtil.screenshot();
-        Point point = OCRUtil.getPoint(screenshot, Constant.STARTGAME);
+        Point point = OCRUtil.getPoint(screenshot, Constant.START_GAME);
 
         if (point != null) {
 
@@ -45,7 +45,7 @@ public class GameUtil {
     public static void clickLogin() throws IOException, InterruptedException {
         String screenshot = ADBUtil.screenshot();
 
-        TextBlock textBlock = OCRUtil.getTextBlock(screenshot, Constant.CLICKREGION);
+        TextBlock textBlock = OCRUtil.getTextBlock(screenshot, Constant.CLICK_REGION);
 
         if (textBlock != null) { // 登录操作
             login();
